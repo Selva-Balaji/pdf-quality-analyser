@@ -11,12 +11,12 @@
         theme: {
           extend: {
             colors: {
-              'brand-blue': '#00A8FF',
-              'brand-dark': '#111827',
-              'brand-medium': '#1F2937',
-              'brand-light': '#374151',
-              'brand-lighter': '#4B5563',
-              'brand-text': '#F9FAFB',
+              'brand-blue': '#000000',        // Pure black for primary actions
+              'brand-dark': '#000000',        // Pure black for dark backgrounds
+              'brand-medium': '#1a1a1a',      // Very dark gray
+              'brand-light': '#2a2a2a',       // Dark gray
+              'brand-lighter': '#404040',     // Medium gray
+              'brand-text': '#ffffff',        // Pure white for text
             },
             animation: {
               'fade-in': 'fadeIn 0.5s ease-out forwards',
@@ -43,7 +43,7 @@
 </script>
 <link rel="stylesheet" href="/index.css">
 </head>
-  <body class="bg-brand-dark text-brand-text">
+  <body>
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>

@@ -1,47 +1,57 @@
 
 import React from 'react';
+import { useTheme } from '../contexts/ThemeContext';
 
 interface ScoreGaugeProps {
   score: number;
 }
 
 const ScoreGauge: React.FC<ScoreGaugeProps> = ({ score }) => {
-  const radius = 60;
+  const { theme } = useTheme();
+  const radius = 55;
   const circumference = 2 * Math.PI * radius;
   const offset = circumference - (score / 100) * circumference;
 
   const getScoreColor = (s: number) => {
     if (s < 40) return 'text-red-500';
-    if (s < 75) return 'text-yellow-400';
-    return 'text-green-400';
+    if (s < 75) return 'text-amber-500';
+    return 'text-green-600';
   };
 
   const getTrackColor = (s: number) => {
     if (s < 40) return '#EF4444'; // red-500
-    if (s < 75) return '#FBBF24'; // yellow-400
-    return '#4ADE80'; // green-400
+    if (s < 75) return '#F59E0B'; // amber-500
+    return '#16A34A'; // green-600
+  };
+
+  const getScoreLabel = (s: number) => {
+    if (s >= 90) return 'Excellent';
+    if (s >= 75) return 'Good';
+    if (s >= 60) return 'Fair';
+    if (s >= 40) return 'Poor';
+    return 'Very Poor';
   };
 
   return (
-    <div className="relative my-4 flex items-center justify-center">
-      <svg className="transform -rotate-90" width="160" height="160" viewBox="0 0 140 140">
+    <div className="relative my-6 flex items-center justify-center">
+      <svg className="transform -rotate-90" width="140" height="140" viewBox="0 0 120 120">
         <circle
-          className="text-brand-lighter"
+          className={theme === 'dark' ? 'text-gray-600' : 'text-gray-200'}
           stroke="currentColor"
-          strokeWidth="12"
+          strokeWidth="8"
           fill="transparent"
           r={radius}
-          cx="70"
-          cy="70"
+          cx="60"
+          cy="60"
         />
         <circle
           stroke={getTrackColor(score)}
-          strokeWidth="12"
+          strokeWidth="8"
           strokeLinecap="round"
           fill="transparent"
           r={radius}
-          cx="70"
-          cy="70"
+          cx="60"
+          cy="60"
           style={{
             strokeDasharray: circumference,
             strokeDashoffset: offset,
@@ -53,7 +63,9 @@ const ScoreGauge: React.FC<ScoreGaugeProps> = ({ score }) => {
         <span className="text-5xl font-bold">
           {Math.round(score)}
         </span>
-        <span className="text-sm font-semibold tracking-wider uppercase">Score</span>
+        <span className={`text-base font-semibold tracking-wider ${
+          theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+        }`}>{getScoreLabel(score)}</span>
       </div>
     </div>
   );
