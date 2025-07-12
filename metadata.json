@@ -1,0 +1,5 @@
+{
+  "name": "PDF Quality Analyser",
+  "description": "Analyse the quality of a PDF for OCR performance. The tool provides a score from 1-100 based on metrics like text clarity, noise, skew, and more, using client-side image processing techniques on the first page of the document.",
+  "requestFramePermissions": []
+}
